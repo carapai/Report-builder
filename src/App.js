@@ -237,7 +237,6 @@ const App = () => {
                 legendContents,
                 organisationUnitGroups,
             );
-            console.log("dimensionList", dimensionList);
             if (dimensionList.length > 0) {
                 for (let dim of dimensionList) {
                     try {

@@ -609,7 +609,7 @@ const Filter = ({
                     }
                     loading={loadingGetDatas || loadingLegendContents}
                 >
-                    Update report Testers
+                    Update report
                 </Button>
             </div>
         </>
@@ -717,7 +717,8 @@ const Filter = ({
 
                     {selectedDataTypeFromHTML === TRACKER.value &&
                         TrackerDataTypeContent()}
-                    {AggregateDataTypeContent()}
+                    {selectedDataTypeFromHTML === AGGREGATE.value &&
+                        AggregateDataTypeContent()}
 
                     {OrganisationUnitModal()}
                 </div>
