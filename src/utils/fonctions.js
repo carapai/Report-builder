@@ -430,48 +430,59 @@ const checkImageLegend = async (
     );
 
     if (current_legend && current_legend.items?.length > 0) {
-        for (let item of current_legend.items) {
-            if (!item.image) {
-                injectFromId(attribute_code, value);
-                return setNotif({
-                    show: true,
-                    message: `You try to display some images that have not been configurated for the selected period ( ${dayjs(
-                        period,
-                    ).format(
-                        "YYYY",
-                    )} ) , the values ​​will be displayed instead of these legends ! `,
-                    type: NOTIFICATON_WARNING,
-                });
-            }
-
-            if (
-                parseFloat(parseFloat(value).toFixed(4)) >=
-                    parseFloat(parseFloat(item.start).toFixed(4)) &&
-                parseFloat(parseFloat(value).toFixed(4)) <
-                    parseFloat(parseFloat(item.end).toFixed(4))
-            ) {
-                injectFromId(
-                    attribute_code,
-                    "<img src='" +
-                        item.image +
-                        "' style='width: 40px; height:40px;' />",
-                );
-            }
-
-            if (
-                parseFloat(parseFloat(value).toFixed(4)) >=
-                    parseFloat(parseFloat(item.start).toFixed(4)) &&
-                parseFloat(parseFloat(value).toFixed(4)) ===
-                    parseFloat(parseFloat(item.end).toFixed(4))
-            ) {
-                injectFromId(
-                    attribute_code,
-                    "<img src='" +
-                        item.image +
-                        "' style='width: 40px; height:40px;' />",
-                );
-            }
+        const item = current_legend.items.find((it) => {
+            return (
+                parseFloat(value) >= parseFloat(it.start) &&
+                parseFloat(value) < parseFloat(it.end)
+            );
+        });
+        if (item && item.image) {
+            injectFromId(
+                attribute_code,
+                "<img src='" +
+                    item.image +
+                    "' style='width: 40px; height:40px;' />",
+            );
         }
+        // for (let item of current_legend.items) {
+        //     if (!item.image) {
+        //         injectFromId(attribute_code, value);
+        //         return setNotif({
+        //             show: true,
+        //             message: `You try to display some images that have not been configurated for the selected period ( ${dayjs(
+        //                 period,
+        //             ).format(
+        //                 "YYYY",
+        //             )} ) , the values ​​will be displayed instead of these legends ! `,
+        //             type: NOTIFICATON_WARNING,
+        //         });
+        //     }
+        //     if (
+        //         parseFloat(parseFloat(item.start).toFixed(4)) >=
+        //             parseFloat(parseFloat(value).toFixed(4)) &&
+        //         parseFloat(parseFloat(item.end).toFixed(4)) <
+        //             parseFloat(parseFloat(value).toFixed(4))
+        //     ) {
+        //         injectFromId(
+        //             attribute_code,
+        //             "<img src='" +
+        //                 item.image +
+        //                 "' style='width: 40px; height:40px;' />",
+        //         );
+        //     } else if (
+        //         parseFloat(parseFloat(value).toFixed(4)) >=
+        //             parseFloat(parseFloat(item.start).toFixed(4)) &&
+        //         parseFloat(parseFloat(value).toFixed(4)) ===
+        //             parseFloat(parseFloat(item.end).toFixed(4))
+        //     ) {
+        //         injectFromId(
+        //             attribute_code,
+        //             "<img src='" +
+        //                 item.image +
+        //                 "' style='width: 40px; height:40px;' />",
+        //         );
+        //     }
+        // }
     } else {
         injectFromId(attribute_code, value);
         displayNotificationIfLegendIsNotSet(

@@ -220,9 +220,6 @@ const App = () => {
                 orgUnits,
                 orgUnitLevels,
             );
-
-            console.log("corresponding_parents", selectedReportContent);
-
             const dimensionList = getAggregateDimensionsList(
                 selectedReportContent,
             );
@@ -237,11 +234,13 @@ const App = () => {
                 legendContents,
                 organisationUnitGroups,
             );
+
+            console.log("dimensionList", dimensionList, corresponding_parents);
             if (dimensionList.length > 0) {
                 for (let dim of dimensionList) {
                     try {
-                        const route = ANALYTICS_ROUTE.concat("?dimension=ou:")
-                            .concat(corresponding_parents?.join(";"))
+                        const route = ANALYTICS_ROUTE.concat("?filter=ou:")
+                            .concat(corresponding_parents[0])
                             .concat("&dimension=dx:")
                             .concat(dim)
                             .concat("&dimension=pe:")
@@ -257,11 +256,19 @@ const App = () => {
                         });
                         const response = await request.json();
 
+                        console.log("response analytics", response);
+
+                        const dataValues = response.rows.map((row) => ({
+                            dataElement: row[0],
+                            period: row[1],
+                            value: row[2],
+                            orgUnit: corresponding_parents[0],
+                        }));
                         if (response.status === "ERROR") throw response;
 
-                        setDataValues(response.dataValues);
+                        setDataValues(dataValues);
                         injectDataIntoHtml(
-                            response.dataValues,
+                            dataValues,
                             selectedReportContent,
                             orgUnits,
                             orgUnitLevels,

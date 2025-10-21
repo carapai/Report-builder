@@ -34,9 +34,7 @@ export const USER_GROUPS_ROUTE = API_BASE_ROUTE.concat(
 );
 export const SYSTEM_INFOS_ROUTE = API_BASE_ROUTE.concat("system/info.json");
 export const DATA_STORE_ROUTE = API_BASE_ROUTE.concat("dataStore");
-export const ANALYTICS_ROUTE = API_BASE_ROUTE.concat(
-    "analytics/dataValueSet.json",
-);
+export const ANALYTICS_ROUTE = API_BASE_ROUTE.concat("analytics.json");
 export const TEIS_ROUTE = API_BASE_ROUTE.concat("trackedEntityInstances.json");
 export const SMS_ROUTE_API = API_BASE_ROUTE.concat("sms/outbound");
 export const TRACKER_ENTITY_INSTANCES_ROUTE = API_BASE_ROUTE.concat(
