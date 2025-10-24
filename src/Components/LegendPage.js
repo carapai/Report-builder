@@ -357,11 +357,6 @@ const LegendPage = ({
                     null,
                     {},
                 );
-                console.log(
-                    "refreshCurrentLegendContent: ",
-                    refreshCurrentLegendContent,
-                );
-
                 if (!refreshCurrentLegendContent)
                     throw new Error(
                         currentLegend.name + " Content not found !",

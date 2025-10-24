@@ -288,8 +288,6 @@ const DesignsPage = ({
                 null,
                 [],
             );
-            console.log("refreshReportList:", refreshReportList);
-
             if (editReport && currentRepport && currentRepportContent) {
                 payload = refreshReportList.map((rep) => {
                     if (rep.id === currentRepport.id) {
@@ -310,11 +308,6 @@ const DesignsPage = ({
                     null,
                     {},
                 );
-                console.log(
-                    "refreshCurrentReportContent: ",
-                    refreshCurrentReportContent,
-                );
-
                 payloadReportContent = {
                     ...refreshCurrentReportContent,
                     html: html_code,

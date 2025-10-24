@@ -44,10 +44,6 @@ const drawCamember = async (
     );
 
     const current_html_element = document.getElementById(attribute_code);
-    console.log("attribut code : ", attribute_code);
-
-    console.log(current_html_element);
-
     if (current_legend && current_html_element) {
         let canvas = document.createElement("canvas");
 
@@ -436,6 +432,7 @@ const checkImageLegend = async (
                 parseFloat(value) < parseFloat(it.end)
             );
         });
+
         if (item && item.image) {
             injectFromId(
                 attribute_code,
@@ -444,45 +441,6 @@ const checkImageLegend = async (
                     "' style='width: 40px; height:40px;' />",
             );
         }
-        // for (let item of current_legend.items) {
-        //     if (!item.image) {
-        //         injectFromId(attribute_code, value);
-        //         return setNotif({
-        //             show: true,
-        //             message: `You try to display some images that have not been configurated for the selected period ( ${dayjs(
-        //                 period,
-        //             ).format(
-        //                 "YYYY",
-        //             )} ) , the values ​​will be displayed instead of these legends ! `,
-        //             type: NOTIFICATON_WARNING,
-        //         });
-        //     }
-        //     if (
-        //         parseFloat(parseFloat(item.start).toFixed(4)) >=
-        //             parseFloat(parseFloat(value).toFixed(4)) &&
-        //         parseFloat(parseFloat(item.end).toFixed(4)) <
-        //             parseFloat(parseFloat(value).toFixed(4))
-        //     ) {
-        //         injectFromId(
-        //             attribute_code,
-        //             "<img src='" +
-        //                 item.image +
-        //                 "' style='width: 40px; height:40px;' />",
-        //         );
-        //     } else if (
-        //         parseFloat(parseFloat(value).toFixed(4)) >=
-        //             parseFloat(parseFloat(item.start).toFixed(4)) &&
-        //         parseFloat(parseFloat(value).toFixed(4)) ===
-        //             parseFloat(parseFloat(item.end).toFixed(4))
-        //     ) {
-        //         injectFromId(
-        //             attribute_code,
-        //             "<img src='" +
-        //                 item.image +
-        //                 "' style='width: 40px; height:40px;' />",
-        //         );
-        //     }
-        // }
     } else {
         injectFromId(attribute_code, value);
         displayNotificationIfLegendIsNotSet(
